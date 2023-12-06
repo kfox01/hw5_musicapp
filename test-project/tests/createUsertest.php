@@ -13,14 +13,14 @@ class createUsertest extends TestCase
         parent::setUp();
 
         $this->client = new Client([
-            'base_uri' => 'http://localhost/', // Adjust this to your application's URI
-            'http_errors' => false // To handle HTTP responses other than 200
+            'base_uri' => 'http://localhost/', 
+            'http_errors' => false 
         ]);
     }
 
     public function testPost_CreateUser()
     {
-        $response = $this->client->post('/registration.php', [ // Adjust the endpoint as needed
+        $response = $this->client->post('/registration.php', [ 
             'form_params' => [
                 'username' => 'newUser', // Use a new username
                 'password' => 'newPassword', // Use a new password
@@ -28,6 +28,6 @@ class createUsertest extends TestCase
             ]
         ]);
 
-        $this->assertEquals(201, $response->getStatusCode()); // Assuming 201 is the expected response
+        $this->assertEquals(201, $response->getStatusCode()); 
     }
 }
