@@ -5,7 +5,7 @@ namespace Tests;
 use PHPUnit\Framework\TestCase;
 use GuzzleHttp\Client;
 
-class loginUsertest extends TestCase
+class testPost_LoginUser extends TestCase
 {
     protected $client;
 

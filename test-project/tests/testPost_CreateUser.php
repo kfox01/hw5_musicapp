@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 
-class createUsertest extends TestCase
+class testPost_createUser extends TestCase
 {
     protected $client;
 
