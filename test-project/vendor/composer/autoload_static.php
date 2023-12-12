@@ -19,11 +19,8 @@ class ComposerStaticInit76a08727941bb3eefdc3ae8c767d667b
         array (
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
+            'Phpunit\\Project\\' => 16,
             'PhpParser\\' => 10,
-        ),
-        'K' => 
-        array (
-            'Kyrafox\\TestProject\\' => 20,
         ),
         'G' => 
         array (
@@ -40,20 +37,20 @@ class ComposerStaticInit76a08727941bb3eefdc3ae8c767d667b
     public static $prefixDirsPsr4 = array (
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-client/src',
         ),
+        'Phpunit\\Project\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
+        ),
         'PhpParser\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
-        ),
-        'Kyrafox\\TestProject\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (
