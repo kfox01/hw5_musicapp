@@ -1,33 +1,48 @@
-// createUsertest.php
 <?php
 
-use GuzzleHttp\Client;
 use PHPUnit\Framework\TestCase;
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Response;
 
 class createUsertest extends TestCase
 {
-    private $client;
+    protected $client;
 
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->client = new Client([
-            'base_uri' => 'http://localhost/', 
-            'http_errors' => false 
-        ]);
+        $this->client = new Client(["base_uri" => "http://localhost:80/index.php"]);
     }
 
-    public function testPost_CreateUser()
+    public function testPost_CreateUser(): void
     {
-        $response = $this->client->post('/registration.php', [ 
-            'form_params' => [
-                'username' => 'newUser', // Use a new username
-                'password' => 'newPassword', // Use a new password
-                'confirm_password' => 'newPassword' // Confirm the new password
-            ]
+        // Prepare the data for the POST request
+        $postData = [
+            'reg_username' => 'testUser',
+            'reg_password' => 'testPassword',
+            'c_password' => 'testPassword',
+        ];
+
+        // Mock the HTTP response
+        $response = new Response(201);
+
+        // Set up the Guzzle mock handler
+        $mockHandler = new \GuzzleHttp\Handler\MockHandler([$response]);
+        $handler = \GuzzleHttp\HandlerStack::create($mockHandler);
+        $this->client = new Client(['handler' => $handler]);
+
+        // Make the POST request
+        $response = $this->client->request('POST', 'index.php/user/create', [
+            'json' => $postData,
         ]);
 
-        $this->assertEquals(201, $response->getStatusCode()); 
+        // Assert the response code is 201 (Created)
+        $this->assertEquals(201, $response->getStatusCode());
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        $this->client = null;
     }
 }

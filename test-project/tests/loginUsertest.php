@@ -1,32 +1,46 @@
-// loginUsertest.php
 <?php
 
-use GuzzleHttp\Client;
+namespace Tests;
+
 use PHPUnit\Framework\TestCase;
+use GuzzleHttp\Client;
 
 class loginUsertest extends TestCase
 {
-    private $client;
+    protected $client;
 
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->client = new Client([
-            'base_uri' => 'http://localhost/', // Adjust this to your application's URI
-            'http_errors' => false // To handle HTTP responses other than 200
-        ]);
+        $this->client = new Client(["base_uri" => "http://localhost:80/index.php"]);
     }
 
-    public function testPost_LoginUser()
+    public function testPost_LoginUser(): void
     {
-        $response = $this->client->post('/login.php', [ // Adjust the endpoint as needed
-            'form_params' => [
-                'username' => 'existingUser', // Use an existing username
-                'password' => 'correctPassword', // Use the correct password
-            ]
+        // Hardcoded existing username and password
+        $existingUsername = 'omizz';
+        $existingPassword = '123';
+
+        // Make a POST request to simulate user login
+        $response = $this->client->request('POST', '/index.php/user/login', [
+            'json' => [
+                'log_username' => $existingUsername,
+                'log_password' => $existingPassword,
+            ],
         ]);
 
-        $this->assertEquals(201, $response->getStatusCode()); // Assuming 201 is the expected response
+        // Assert that the response code is 200 (OK) for successful login
+        $this->assertEquals(200, $response->getStatusCode());
+
+        // Optionally, you can assert other details about the response
+        $responseData = json_decode($response->getBody(), true);
+        $this->assertEquals('success', $responseData['status']);
+        $this->assertEquals($existingUsername, $responseData['username']);
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        $this->client = null;
     }
 }

@@ -1,11 +1,11 @@
 {
-    "name": "kyrafox/test-project",
+    "name": "phpunit/project",
     "require-dev": {
         "phpunit/phpunit": "^10.5"
     },
     "autoload": {
         "psr-4": {
-            "Kyrafox\\TestProject\\": "src/"
+            "Phpunit\\Project\\": "src/"
         }
     },
     "require": {
